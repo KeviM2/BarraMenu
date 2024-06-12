@@ -1,0 +1,65 @@
+#Codigo
+
+package barramenu;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+public class BarraMenu extends Application {    
+    @Override
+    public void start(Stage primaryStage) {
+        MenuBar menuBar = new MenuBar();
+
+        Menu menuArchivo = new Menu("Archivo");
+        Menu menuEditar = new Menu("Editar");
+        Menu menuAyuda = new Menu("Ayuda");
+
+        MenuItem nuevoItem = new MenuItem("Nuevo");
+        MenuItem abrirItem = new MenuItem("Abrir");
+        MenuItem guardarItem = new MenuItem("Guardar");
+        MenuItem salirItem = new MenuItem("Salir");
+
+        nuevoItem.setOnAction(e -> System.out.println("Nuevo archivo creado"));
+        abrirItem.setOnAction(e -> System.out.println("Abrir archivo"));
+        guardarItem.setOnAction(e -> System.out.println("Archivo guardado"));
+        salirItem.setOnAction(e -> {
+            System.out.println("Saliendo de la aplicación");
+            primaryStage.close();
+        });
+
+        menuArchivo.getItems().addAll(nuevoItem, abrirItem, guardarItem, new SeparatorMenuItem(), salirItem);
+
+        MenuItem cortarItem = new MenuItem("Cortar");
+        MenuItem copiarItem = new MenuItem("Copiar");
+        MenuItem pegarItem = new MenuItem("Pegar");
+
+        cortarItem.setOnAction(e -> System.out.println("Cortar texto"));
+        copiarItem.setOnAction(e -> System.out.println("Copiar texto"));
+        pegarItem.setOnAction(e -> System.out.println("Pegar texto"));
+
+        menuEditar.getItems().addAll(cortarItem, copiarItem, pegarItem);
+
+        MenuItem acercaDeItem = new MenuItem("Acerca de");
+
+        acercaDeItem.setOnAction(e -> System.out.println("Acerca de esta aplicación"));
+
+        menuAyuda.getItems().add(acercaDeItem);
+
+        menuBar.getMenus().addAll(menuArchivo, menuEditar, menuAyuda);
+
+        BorderPane root = new BorderPane();
+        root.setTop(menuBar);
+
+        Scene scene = new Scene(root, 300, 300);
+
+        primaryStage.setTitle("Barra de Menú en JavaFX");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }    
+}
